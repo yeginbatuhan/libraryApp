@@ -27,9 +27,22 @@
         @foreach ($books as $book)
             <tr>
                 <td>{{ $book->title }}</td>
-                <td>{{ $book->author }}</td>
-                <td>{{ $book->isbn }}</td>
-                <td>{{ $book->publishDate }}</td>
+                <td>
+                    <!-- Kitap adedi durumunu kontrol et -->
+                    @if ($book->quantity > 0)
+                        @if ($book->status == 'available')
+                            Kütüphanede ({{ $book->quantity }} adet)
+                        @elseif ($book->status == 'checked_out')
+                            Ödünç Alındı ({{ $book->quantity }} adet)
+                        @elseif ($book->status == 'reserved')
+                            Rezerve ({{ $book->quantity }} adet)
+                        @else
+                            Bilinmeyen Durum
+                        @endif
+                    @else
+                        Stokta Yok
+                    @endif
+                </td>
                 <td>
                     <a href="{{ route('books.edit', $book) }}" class="btn btn-sm btn-primary">Düzenle</a>
                     <form action="{{ route('books.destroy', $book) }}" method="POST" style="display: inline;">

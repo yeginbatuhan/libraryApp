@@ -32,14 +32,11 @@ class BookController extends Controller
             'quantity' => 'required|integer|min:1',
             'status' => 'required|in:' . implode(',', array_keys($this->statusOptions))
         ]);
-
-        // Create book with quantity
         $book = new Book();
         $book->title = $validatedData['title'];
         $book->quantity = $validatedData['quantity'];
         $book->status = $validatedData['status'];
         $book->save();
-
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla eklendi!');
     }
 
@@ -53,15 +50,19 @@ class BookController extends Controller
         $statusOptions = $this->statusOptions;
         return view('books.edit', compact('book'));
     }
-
     public function update(Request $request, Book $book)
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
+            'quantity' => 'required|integer|min:1',
             'status' => 'required|in:' . implode(',', array_keys($this->statusOptions))
         ]);
 
-        $book->update($validatedData);
+        $book->title = $validatedData['title'];
+        $book->quantity = $validatedData['quantity'];
+        $book->status = $validatedData['status'];
+        $book->save();
+
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla güncellendi!');
     }
 
