@@ -21,20 +21,39 @@ class BookController extends Controller
     }
 
     // Yeni kitap kaydet
+    // Yeni kitap kaydet
+    // Yeni kitap kaydet
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'author' => 'required',
+            'author_id' => 'required|exists:authors,id',
             'isbn' => 'required|unique:books',
             'publishDate' => 'required|date',
-            'category' => 'required',
+            'category_id' => 'required|exists:categories,id',
             'status' => 'required'
         ]);
 
-        $book = Book::create($validatedData);
+        Book::create($validatedData);
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla eklendi!');
     }
+
+// Kitap bilgilerini güncelle
+    public function update(Request $request, Book $book)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'author_id' => 'required|exists:authors,id',
+            'isbn' => 'required|unique:books,isbn,' . $book->id,
+            'publishDate' => 'required|date',
+            'category_id' => 'required|exists:categories,id',
+            'status' => 'required'
+        ]);
+
+        $book->update($validatedData);
+        return redirect()->route('books.index')->with('success', 'Kitap başarıyla güncellendi!');
+    }
+
 
     // Kitap detaylarını göster
     public function show(Book $book)
@@ -46,22 +65,6 @@ class BookController extends Controller
     public function edit(Book $book)
     {
         return view('books.edit', compact('book'));
-    }
-
-    // Kitap bilgilerini güncelle
-    public function update(Request $request, Book $book)
-    {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'author' => 'required',
-            'isbn' => 'required|unique:books,isbn,' . $book->id,
-            'publishDate' => 'required|date',
-            'category' => 'required',
-            'status' => 'required'
-        ]);
-
-        $book->update($validatedData);
-        return redirect()->route('books.index')->with('success', 'Kitap başarıyla güncellendi!');
     }
 
     // Kitabı sil
