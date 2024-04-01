@@ -7,67 +7,64 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    // Kitap listesini göster
+    private $statusOptions = [
+        'available' => 'Kütüphanede',
+        'checked_out' => 'Ödünç Alındı',
+        'reserved' => 'Rezerve'
+    ];
+
     public function index()
     {
         $books = Book::all();
         return view('books.index', compact('books'));
     }
 
-    // Kitap oluşturma formunu göster
     public function create()
     {
+        $statusOptions = $this->statusOptions;
         return view('books.create');
     }
 
-    // Yeni kitap kaydet
-    // Yeni kitap kaydet
-    // Yeni kitap kaydet
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'author_id' => 'required|exists:authors,id',
-            'isbn' => 'required|unique:books',
-            'publishDate' => 'required|date',
-            'category_id' => 'required|exists:categories,id',
-            'status' => 'required'
+            'quantity' => 'required|integer|min:1',
+            'status' => 'required|in:' . implode(',', array_keys($this->statusOptions))
         ]);
 
-        Book::create($validatedData);
+        // Create book with quantity
+        $book = new Book();
+        $book->title = $validatedData['title'];
+        $book->quantity = $validatedData['quantity'];
+        $book->status = $validatedData['status'];
+        $book->save();
+
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla eklendi!');
     }
 
-// Kitap bilgilerini güncelle
+    public function show(Book $book)
+    {
+        return view('books.show', compact('book'));
+    }
+
+    public function edit(Book $book)
+    {
+        $statusOptions = $this->statusOptions;
+        return view('books.edit', compact('book'));
+    }
+
     public function update(Request $request, Book $book)
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'author_id' => 'required|exists:authors,id',
-            'isbn' => 'required|unique:books,isbn,' . $book->id,
-            'publishDate' => 'required|date',
-            'category_id' => 'required|exists:categories,id',
-            'status' => 'required'
+            'status' => 'required|in:' . implode(',', array_keys($this->statusOptions))
         ]);
 
         $book->update($validatedData);
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla güncellendi!');
     }
 
-
-    // Kitap detaylarını göster
-    public function show(Book $book)
-    {
-        return view('books.show', compact('book'));
-    }
-
-    // Kitap düzenleme formunu göster
-    public function edit(Book $book)
-    {
-        return view('books.edit', compact('book'));
-    }
-
-    // Kitabı sil
     public function destroy(Book $book)
     {
         $book->delete();

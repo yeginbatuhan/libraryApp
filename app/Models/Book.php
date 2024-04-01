@@ -11,28 +11,12 @@ class Book extends Model
 
     protected $fillable = [
         'title',
-        'author',
-        'isbn',
-        'publishDate',
-        'category',
         'status'
     ];
 
     protected $attributes = [
         'id',
         'title',
-        'author',
-        'isbn',
-        'publishDate',
-        'category',
         'status'
     ];
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-    public function author()
-    {
-        return $this->belongsTo(Author::class);
-    }
 }

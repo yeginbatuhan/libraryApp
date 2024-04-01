@@ -1,4 +1,6 @@
 {{-- resources/views/books/index.blade.php --}}
+@include('partials.navbar')
+
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,15 +13,13 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between mb-3">
         <h1>Kitap Listesi</h1>
-        <a href="{{ route('books.create') }}" class="btn btn-primary">Kitap Ekle</a>
+        <a href="{{ route('books.create') }}" style="width: 15%" class="btn btn-success">Kitap Ekle</a>
     </div>
     <table class="table">
         <thead>
         <tr>
             <th>Kitap Adı</th>
-            <th>Yazar</th>
-            <th>ISBN</th>
-            <th>Yayın Tarihi</th>
+            <th>Durum</th>
             <th>İşlemler</th>
         </tr>
         </thead>
@@ -50,3 +50,4 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+@include('partials.footer')

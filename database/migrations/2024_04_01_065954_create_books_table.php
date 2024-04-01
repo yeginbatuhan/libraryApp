@@ -14,10 +14,6 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('author_id')->constrained('authors');
-            $table->string('isbn');
-            $table->date('publishDate');
-            $table->foreignId('category_id')->constrained('categories');
             $table->enum('status', ['available', 'checked_out', 'lost', 'damaged']);
             $table->softDeletes();
             $table->timestamps();

@@ -1,4 +1,4 @@
-{{-- resources/views/books/create.blade.php --}}
+@include('partials.navbar')
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,25 +18,12 @@
             <input type="text" class="form-control" id="title" name="title" placeholder="Kitap Adı" required>
         </div>
 
+        <!-- Kitap adedi için yeni alan -->
         <div class="form-group">
-            <label for="author">Yazar</label>
-            <input type="text" class="form-control" id="author" name="author" placeholder="Yazar" required>
+            <label for="quantity">Kitap Adedi</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Kitap Adedi" required min="1">
         </div>
 
-        <div class="form-group">
-            <label for="isbn">ISBN</label>
-            <input type="text" class="form-control" id="isbn" name="isbn" placeholder="ISBN" required>
-        </div>
-
-        <div class="form-group">
-            <label for="publishDate">Yayın Tarihi</label>
-            <input type="date" class="form-control" id="publishDate" name="publishDate" required>
-        </div>
-
-        <div class="form-group">
-            <label for="category">Kategori</label>
-            <input type="text" class="form-control" id="category" name="category" placeholder="Kategori" required>
-        </div>
         <button type="submit" class="btn btn-primary">Ekle</button>
     </form>
 </div>
@@ -47,3 +34,4 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+@include('partials.footer')
