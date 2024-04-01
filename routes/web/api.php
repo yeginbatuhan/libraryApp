@@ -22,7 +22,7 @@ Route::prefix('v1')->group(function () {
     Route::delete('authors/{id}', [AuthorController::class, 'destroy']);
 
     // Kitap rotaları
-    Route::get('books', [BookController::class, 'index']);
+    Route::get('books', [BookController::class, 'books.index']);
     Route::get('books/{id}', [BookController::class, 'show']);
     Route::post('books', [BookController::class, 'store']);
     Route::put('books/{id}', [BookController::class, 'update']);
