@@ -19,7 +19,7 @@
         <thead>
         <tr>
             <th>Kitap Adı</th>
-            <th>Durum</th>
+            <th>Ödünç Alan Öğrenci</th>
             <th>İşlemler</th>
         </tr>
         </thead>
@@ -28,19 +28,10 @@
             <tr>
                 <td>{{ $book->title }}</td>
                 <td>
-                    <!-- Kitap adedi durumunu kontrol et -->
-                    @if ($book->quantity > 0)
-                        @if ($book->status == 'available')
-                            Kütüphanede ({{ $book->quantity }} adet)
-                        @elseif ($book->status == 'checked_out')
-                            Ödünç Alındı ({{ $book->quantity }} adet)
-                        @elseif ($book->status == 'reserved')
-                            Rezerve ({{ $book->quantity }} adet)
-                        @else
-                            Bilinmeyen Durum
-                        @endif
+                    @if ($book->user)
+                        {{ $book->user->name }} <!-- Ödünç alan öğrencinin adını göster -->
                     @else
-                        Stokta Yok
+                        Ödünç Alınmadı
                     @endif
                 </td>
                 <td>

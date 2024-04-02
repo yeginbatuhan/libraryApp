@@ -20,4 +20,8 @@ class Book extends Model
         'title',
         'status'
     ];
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

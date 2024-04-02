@@ -7,12 +7,14 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/books">Ana Sayfa <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/books">Kitaplar<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/books/create">Kitap Ekle</a>
             </li>
-            <!-- Diğer menü öğeleri -->
+            <li class="nav-item">
+                <a class="nav-link" href="/books/load">Kitap Ödünç Ver</a>
+            </li>
         </ul>
     </div>
 </nav>

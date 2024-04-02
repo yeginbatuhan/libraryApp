@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\LoanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +23,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
     Route::put('/books/{book}', [BookController::class, 'update'])->name('books.update');
     Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
+    Route::post('/books/{book}/borrow', [LoanController::class, 'borrow']);
+    Route::post('/books/{book}/return', [LoanController::class, 'return']);
+    Route::get('/books/load', [LoanController::class, 'load'])->name('books.load');
 });

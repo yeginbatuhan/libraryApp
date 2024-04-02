@@ -1,4 +1,3 @@
-{{-- resources/views/books/edit.blade.php --}}
 @include('partials.navbar')
 
     <!DOCTYPE html>
@@ -15,15 +14,17 @@
     <form action="{{ route('books.update', $book) }}" method="POST">
         @csrf
         @method('PUT') <!-- Form methodunu PUT olarak ayarla -->
+
         <div class="form-group">
             <label for="title">Kitap Adı</label>
             <input type="text" class="form-control" id="title" name="title" value="{{ $book->title }}" required>
         </div>
+
         <div class="form-group">
             <label for="quantity">Kitap Adedi</label>
-            <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $book->quantity }}"
-                   required min="1">
+            <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $book->quantity }}" required min="1">
         </div>
+
         <div class="form-group">
             <label for="status">Durum</label>
             <select class="form-control" id="status" name="status" required>
@@ -32,6 +33,7 @@
                 @endforeach
             </select>
         </div>
+
         <button type="submit" class="btn btn-primary">Güncelle</button>
     </form>
 </div>
