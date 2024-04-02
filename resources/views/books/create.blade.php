@@ -12,7 +12,6 @@
     <h1>Kitap Ekle</h1>
     <form action="{{ route('books.store') }}" method="POST">
         @csrf
-
         <div class="form-group">
             <label for="title">Kitap Adı</label>
             <input type="text" class="form-control" id="title" name="title" placeholder="Kitap Adı" required>

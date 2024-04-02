@@ -13,42 +13,60 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between mb-3">
         <h1>Kitap Listesi</h1>
-        <a href="{{ route('books.create') }}" style="width: 15%" class="btn btn-success">Kitap Ekle</a>
+        <a href="{{ route('books.create') }}" style="width: 15%;height: 25%" class="btn btn-info">Kitap Ekle</a>
     </div>
     <table class="table">
         <thead>
         <tr>
             <th>Kitap Adı</th>
-            <th>Ödünç Alan Öğrenci</th>
+            <th>Durumu</th>
             <th>İşlemler</th>
         </tr>
         </thead>
         <tbody>
-        @foreach ($books as $book)
-            <tr>
-                <td>{{ $book->title }}</td>
-                <td>
-                    @if ($book->user)
-                        {{ $book->user->name }} <!-- Ödünç alan öğrencinin adını göster -->
-                    @else
-                        Ödünç Alınmadı
-                    @endif
-                </td>
-                <td>
-                    <a href="{{ route('books.edit', $book) }}" class="btn btn-sm btn-primary">Düzenle</a>
-                    <form action="{{ route('books.destroy', $book) }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger">Sil</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
+        <!-- Burada kitapların listesi olacak, her kitap için bir satır -->
+        <tr>
+            <td>Kitap Adı 1</td>
+            <td>Durumu 1</td>
+            <td>
+                <!-- Düzenleme linki -->
+                <a href="{{ route('books.edit', 1) }}" class="btn btn-primary">Düzenle</a>
+                <!-- Silme formu -->
+                <form action="{{ route('books.destroy', 1) }}" method="POST" style="display: inline-block;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Sil</button>
+                </form>
+                <!-- Detay butonu -->
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#detailModal">Detay</button>
+            </td>
+        </tr>
+        <!-- Diğer kitaplar için benzer satırlar -->
         </tbody>
     </table>
 </div>
 
-<!-- Bootstrap JS ve bağımlılıklarını ekleme -->
+<!-- Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel">Kitap Detayı</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Kitap adı: Kitap Adı 1<br>
+                Kitap durumu: Durumu 1<br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
