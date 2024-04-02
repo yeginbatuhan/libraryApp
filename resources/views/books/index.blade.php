@@ -59,6 +59,8 @@
             <div class="modal-body">
                 Kitap adı: Kitap Adı 1<br>
                 Kitap durumu: Durumu 1<br>
+                Kitap Hangi Öğrencide
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
