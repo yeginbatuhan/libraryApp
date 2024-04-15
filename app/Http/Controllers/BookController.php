@@ -56,6 +56,7 @@ class BookController extends Controller
 
     public function showLendForm()
     {
+        dd('show lend form');
         $books = Book::where('status', 'available')->get();
         $students = Student::all();
         return view('books.lend-form', compact('books', 'students'));

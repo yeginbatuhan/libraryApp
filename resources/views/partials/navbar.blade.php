@@ -29,7 +29,7 @@
                 <a class="nav-link" href="/books/create" style="color: white;">Kitap Ekle</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('books.lend') }}" style="color: white;">Ödünç Ver</a>
+                <a class="nav-link" href="/books/lend" style="color: white;">Ödünç Ver</a>
             </li>
         </ul>
     </div>
@@ -39,8 +39,15 @@
     @yield('content')
 </div>
 <!-- Bootstrap JS ve diğer bağımlılıklar -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.navbar-toggler').click(function(){
+            $('.navbar-collapse').toggle('show');
+        });
+    });
+</script>
 </body>
 </html>
