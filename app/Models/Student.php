@@ -9,22 +9,13 @@ class Student extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',
         'name',
         'surname',
-        'clasroom',
+        'classroom',
     ];
 
-    protected $attributes = [
-        'id',
-        'name',
-        'surname',
-        'clasroom',
-    ];
-    public function book()
+    public function books()
     {
         return $this->hasMany(Book::class);
     }
-
-
 }
