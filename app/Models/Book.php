@@ -9,20 +9,10 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'id',
-        'title',
-        'status'
-    ];
-
-    protected $attributes = [
-        'id',
-        'title',
-        'status'
-    ];
+    protected $fillable = ['title', 'quantity', 'status', 'student_id'];
 
     public function student()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Student::class, 'student_id');
     }
 }
