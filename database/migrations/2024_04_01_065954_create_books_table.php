@@ -9,11 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->integer('quantity');
             $table->enum('status', ['available', 'checked_out', 'lost', 'damaged']);
             $table->softDeletes();
             $table->timestamps();

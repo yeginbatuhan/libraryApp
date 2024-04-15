@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -15,13 +16,14 @@ class BookController extends Controller
 
     public function index()
     {
-        $books = Book::all();
-        return view('books.index', compact('books'));
+        $books = Book::with('student')->get();
+        $students = Student::all();
+        $statusOptions = $this->statusOptions;
+        return view('books.index', compact('books', 'students', 'statusOptions'));
     }
 
     public function create()
     {
-        $statusOptions = $this->statusOptions;
         return view('books.create');
     }
 
@@ -29,14 +31,15 @@ class BookController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'quantity' => 'required|integer|min:1',
-            'status' => 'required|in:' . implode(',', array_keys($this->statusOptions))
+            'quantity' => 'required|integer|min:1'
         ]);
+
         $book = new Book();
         $book->title = $validatedData['title'];
         $book->quantity = $validatedData['quantity'];
-        $book->status = $validatedData['status'];
+        $book->status = 'available';
         $book->save();
+
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla eklendi!');
     }
 
@@ -48,8 +51,29 @@ class BookController extends Controller
     public function edit(Book $book)
     {
         $statusOptions = $this->statusOptions;
-        return view('books.edit', compact('book'));
+        return view('books.edit', compact('book', 'statusOptions'));
     }
+
+    public function showLendForm()
+    {
+        $books = Book::where('status', 'available')->get();
+        $students = Student::all();
+        return view('books.lend-form', compact('books', 'students'));
+    }
+
+    public function lend(Request $request)
+    {
+        $validatedData = $request->validate([
+            'book_id' => 'required',
+            'student_id' => 'required',
+        ]);
+        $book = Book::find($validatedData['book_id']);
+        $book->student_id = $validatedData['student_id'];
+        $book->status = 'checked_out';
+        $book->save();
+        return redirect()->route('books.index')->with('success', 'Kitap başarıyla ödünç verildi!');
+    }
+
     public function update(Request $request, Book $book)
     {
         $validatedData = $request->validate([
@@ -69,6 +93,7 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
+
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla silindi!');
     }
 }
