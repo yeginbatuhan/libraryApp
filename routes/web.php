@@ -24,7 +24,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
     Route::put('/books/{book}', [BookController::class, 'update'])->name('books.update');
     Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
-    Route::get('/books/lend', [BookController::class, 'showLendForm'])->name('books.lend');
+    Route::get('/books/lend/payment', [BookController::class, 'showLendForm'])->name('books.lend');
     Route::post('/books/lend', [BookController::class, 'lend'])->name('books.lend.post');
 
     Route::get('/students', [StudentController::class, 'index'])->name('students.index');

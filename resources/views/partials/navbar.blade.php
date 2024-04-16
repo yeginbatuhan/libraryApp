@@ -29,7 +29,7 @@
                 <a class="nav-link" href="/books/create" style="color: white;">Kitap Ekle</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/books/lend" style="color: white;">Ödünç Ver</a>
+                <a class="nav-link" href="/books/lend/payment" style="color: white;">Ödünç Ver</a>
             </li>
         </ul>
     </div>
