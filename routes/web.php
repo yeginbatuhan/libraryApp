@@ -26,6 +26,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
     Route::get('/books/lend', [BookController::class, 'showLendForm'])->name('books.lend');
     Route::post('/books/lend', [BookController::class, 'lend'])->name('books.lend.post');
+
     Route::get('/students', [StudentController::class, 'index'])->name('students.index');
     Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
     Route::post('/students', [StudentController::class, 'store'])->name('students.store');
