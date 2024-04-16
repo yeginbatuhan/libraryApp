@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
 {
@@ -56,6 +57,7 @@ class BookController extends Controller
 
     public function showLendForm()
     {
+        Log::info('Testing showLendForm');
         $books = Book::where('status', 'available')->get();
         $students = Student::all();
         return view('books.lend-form', compact('books', 'students'));
