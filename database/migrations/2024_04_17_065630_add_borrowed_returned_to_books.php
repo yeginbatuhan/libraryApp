@@ -9,20 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('books', function (Blueprint $table) {
-            //
+            $table->dateTime('borrowed_at')->nullable()->after('status');
+            $table->dateTime('returned_at')->nullable()->after('borrowed_at');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::table('books', function (Blueprint $table) {
-            //
+            $table->dropColumn(['borrowed_at', 'returned_at']);
         });
     }
 };
