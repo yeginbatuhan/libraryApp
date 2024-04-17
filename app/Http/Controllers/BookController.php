@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Book;
@@ -66,11 +67,28 @@ class BookController extends Controller
             'book_id' => 'required',
             'student_id' => 'required',
         ]);
+
         $book = Book::find($validatedData['book_id']);
         $book->student_id = $validatedData['student_id'];
         $book->status = 'checked_out';
+        $book->borrowed_at = now();
+        $book->returned_at = null;
         $book->save();
+
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla ödünç verildi!');
+    }
+
+    public function returnBook(Request $request, $bookId)
+    {
+        $book = Book::find($bookId);
+        if (!$book) {
+            return redirect()->back()->with('error', 'Kitap bulunamadı!');
+        }
+        $book->status = 'available';
+        $book->returned_at = now();
+        $book->save();
+
+        return redirect()->route('books.index')->with('success', 'Kitap başarıyla iade edildi.');
     }
 
     public function update(Request $request, Book $book)
@@ -87,18 +105,6 @@ class BookController extends Controller
         $book->save();
 
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla güncellendi!');
-    }
-
-    public function returnBook(Request $request, $bookId)
-    {
-        $book = Book::find($bookId);
-        if (!$book) {
-            return redirect()->back()->with('error', 'Kitap bulunamadı!');
-        }
-        $book->status = 'available';
-        $book->save();
-
-        return redirect()->route('books.index')->with('success', 'Kitap başarıyla iade edildi.');
     }
 
     public function destroy(Book $book)

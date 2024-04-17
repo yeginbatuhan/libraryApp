@@ -19,22 +19,42 @@
                 <thead>
                 <tr>
                     <th>Kitap Adı</th>
-                    <th>Durum</th>
                     <th>İşlemler</th>
                 </tr>
                 </thead>
-                <tbody>
-                @forelse($student->books as $book)
+                <tbody>@forelse($student->books as $book)
                     <tr>
                         <td>{{ $book->title }}</td>
-                        <td>{{ $book->status }}</td>
                         <td>
-                            <a href="{{ route('books.show', $book->id) }}" class="btn btn-info">Detay</a>
+                            <!-- Modal tetikleyici buton -->
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#bookDetailModal{{ $book->id }}">Detay</button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="bookDetailModal{{ $book->id }}" tabindex="-1" role="dialog" aria-labelledby="bookDetailModalLabel{{ $book->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="bookDetailModalLabel{{ $book->id }}">Kitap Detayları</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Kitap Adı: {{ $book->title }}</p>
+                                            <p>Ödünç Alınma Tarihi: {{ $book->borrowed_at ? $book->borrowed_at->format('d.m.Y H:i') : 'Bilgi Yok' }}</p>
+                                            <p>İade Tarihi: {{ $book->returned_at ? $book->returned_at->format('d.m.Y H:i') : 'Bilgi Yok' }}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3">Bu öğrencinin aldığı kitap yok.</td>
+                        <td colspan="2">Bu öğrencinin aldığı kitap yok.</td>
                     </tr>
                 @endforelse
                 </tbody>
