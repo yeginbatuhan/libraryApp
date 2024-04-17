@@ -91,6 +91,19 @@ class BookController extends Controller
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla güncellendi!');
     }
 
+    public function returnBook(Request $request, $bookId)
+    {
+        $book = Book::find($bookId);
+        if (!$book) {
+            return redirect()->back()->with('error', 'Kitap bulunamadı!');
+        }
+        $book->status = 'available';
+        $book->save();
+
+        return redirect()->route('books.index')->with('success', 'Kitap başarıyla iade edildi.');
+    }
+
+
     public function destroy(Book $book)
     {
         $book->delete();
