@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
 {
@@ -102,7 +100,6 @@ class BookController extends Controller
 
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla iade edildi.');
     }
-
 
     public function destroy(Book $book)
     {
