@@ -12,7 +12,7 @@
 <nav class="navbar navbar-expand-lg navbar-light text-center"
      style="background-color: rgba(0, 51, 87, 0.85); border-radius: 0 0 15% 15%;">
     <a class="navbar-brand" href="#" style="color: white;">
-        <img src="{{ asset('storage/logo2.jpg') }}" height="50" alt="Logo" style="border-radius: 25px;">
+        <img src="{{ asset('storage/logo2.jpg') }}" height="50" alt="Logo" style="border-radius: 25px;"> TEGV Kütüphanesi
     </a>
     <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
