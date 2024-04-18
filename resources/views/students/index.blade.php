@@ -14,7 +14,7 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between mb-3">
         <h1>Öğrenci Listesi</h1>
-        <a href="{{ route('students.create') }}" class="btn btn-info">Yeni Öğrenci Ekle</a>
+        <a href="{{ route('students.create') }}" style="display: flex;justify-content: center;align-items: center;" class="btn btn-info">Yeni Öğrenci Ekle</a>
     </div>
     <table class="table text-center">
         <thead>

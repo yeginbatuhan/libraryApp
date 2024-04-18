@@ -13,7 +13,7 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between mb-3">
         <h1>Kitap Listesi</h1>
-        <a href="{{ route('books.create') }}" class="btn btn-info">Yeni Kitap Ekle</a>
+        <a href="{{ route('books.create') }}" style="height: 56px;width: 148px;display: flex;justify-content: center;align-items: center;" class="btn btn-info">Yeni Kitap Ekle</a>
     </div>
     <table class="table">
         <thead>
