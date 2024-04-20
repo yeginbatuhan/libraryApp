@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->integer('quantity');
+            $table->integer('borrowed_count')->default(0);
             $table->enum('status', ['available', 'checked_out', 'lost', 'damaged']);
             $table->softDeletes();
             $table->timestamps();

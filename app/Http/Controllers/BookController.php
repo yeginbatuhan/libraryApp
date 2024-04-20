@@ -56,7 +56,7 @@ class BookController extends Controller
 
     public function showLendForm()
     {
-        $books = Book::where('status', 'available')->get();
+        $books = Book::get();
         $students = Student::all();
         return view('books.lend-form', compact('books', 'students'));
     }
@@ -69,13 +69,21 @@ class BookController extends Controller
         ]);
 
         $book = Book::find($validatedData['book_id']);
-        $book->student_id = $validatedData['student_id'];
-        $book->status = 'checked_out';
-        $book->borrowed_at = now();
-        $book->returned_at = null;
-        $book->save();
+        if (!$book) {
+            return redirect()->back()->with('error', 'Kitap bulunamadı!');
+        }
 
-        return redirect()->route('books.index')->with('success', 'Kitap başarıyla ödünç verildi!');
+        if ($book->quantity > $book->borrowed_count) {
+            $book->student_id = $validatedData['student_id'];
+            $book->status = 'checked_out';
+            $book->borrowed_at = now();
+            $book->returned_at = null;
+            $book->borrowed_count += 1;
+            $book->save();
+            return redirect()->route('books.index')->with('success', 'Kitap başarıyla ödünç verildi!');
+        } else {
+            return redirect()->back()->with('error', 'Bu kitaptan stokta kalmadı!');
+        }
     }
 
     public function returnBook(Request $request, $bookId)
@@ -86,6 +94,7 @@ class BookController extends Controller
         }
         $book->status = 'available';
         $book->returned_at = now();
+        $book->borrowed_count -= 1;
         $book->save();
 
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla iade edildi.');

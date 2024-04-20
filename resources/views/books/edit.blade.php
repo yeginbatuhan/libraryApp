@@ -1,6 +1,6 @@
-@include('partials.navbar')
+<x-app-layout>
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -45,3 +45,5 @@
 </body>
 </html>
 @include('partials.footer')
+</x-app-layout>
+```

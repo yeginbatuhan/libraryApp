@@ -1,6 +1,5 @@
-@include('partials.navbar')
-
-    <!DOCTYPE html>
+<x-app-layout>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,9 +10,13 @@
 </head>
 <body>
 <div class="container mt-5">
-    <div class="d-flex justify-content-between mb-3">
-        <h1>Kitap Listesi</h1>
-        <a href="{{ route('books.create') }}" style="height: 56px;width: 148px;display: flex;justify-content: center;align-items: center;" class="btn btn-info">Yeni Kitap Ekle</a>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Kitap Listesi') }}
+        </h2>
+    </x-slot>
+    <div class="d-flex justify-content-right mb-3">
+        <a href="{{ route('books.create') }}" style="height: 38px;width: 148px;display: flex;justify-content: center;align-items: center;" class="btn btn-info">Yeni Kitap Ekle</a>
     </div>
     <table class="table">
         <thead>
@@ -59,3 +62,5 @@
 @include('partials.footer')
 </body>
 </html>
+</x-app-layout>
+```
