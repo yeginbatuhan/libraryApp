@@ -24,9 +24,9 @@
                     <x-nav-link :href="route('books.create')" :active="request()->routeIs('books.create')">
                         {{ __('Kitap Ekle') }}
                     </x-nav-link>
-{{--                    <x-nav-link :href="route('books.lend.payment')" :active="request()->routeIs('books.lend.payment')">--}}
-{{--                        {{ __('Ödünç Ver') }}--}}
-{{--                    </x-nav-link>--}}
+                    <x-nav-link :href="route('books.lend.payment')" :active="request()->routeIs('books.lend.payment')">
+                        {{ __('Ödünç Ver') }}
+                    </x-nav-link>
                 </div>
             </div>
 

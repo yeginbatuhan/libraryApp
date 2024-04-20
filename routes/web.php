@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/books/{book}', [BookController::class, 'update'])->name('books.update');
     Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
     Route::get('/books/lend/payment', [BookController::class, 'showLendForm'])->name('books.lend');
+    Route::get('/books/lend', [BookController::class, 'showLendForm'])->name('books.lend.payment');
+
     Route::post('/books/lend', [BookController::class, 'lend'])->name('books.lend.post');
     Route::post('/books/{book}/return', [BookController::class, 'returnBook'])->name('books.return');
 
