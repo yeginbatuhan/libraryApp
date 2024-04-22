@@ -58,7 +58,7 @@ class BookController extends Controller
     {
         $books = Book::where('quantity', '>', 0)->get();
         $students = Student::all();
-        return view('books.lend', compact('books', 'students'));
+        return view('books.lend-form', compact('books', 'students'));
     }
 
     public function lend(Request $request)
