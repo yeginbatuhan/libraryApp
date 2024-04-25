@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Loan;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -56,9 +57,10 @@ class BookController extends Controller
 
     public function showLendForm()
     {
+        $loans = Loan::with('book', 'student')->get();
         $books = Book::where('quantity', '>', 0)->get();
         $students = Student::all();
-        return view('books.lend-form', compact('books', 'students'));
+        return view('books.lend-list', compact('books', 'students', 'loans'));
     }
 
     public function lend(Request $request)
@@ -85,6 +87,7 @@ class BookController extends Controller
             return redirect()->back()->with('error', 'Bu kitaptan stokta kalmadı!');
         }
     }
+
 
     public function returnBook(Request $request, $bookId)
     {

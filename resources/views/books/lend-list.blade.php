@@ -9,7 +9,14 @@
     </head>
     <body>
     <div class="container mt-5">
-        <h1>Ödünç Verilen Kitaplar</h1>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Ödünç Verilen Kitaplar') }}
+            </h2>
+        </x-slot>
+        <div class="d-flex justify-content-right mb-3">
+            <a href="{{ route('books.lend.post') }}" style="height: 38px;width: 148px;display: flex;justify-content: center;align-items: center;" class="btn btn-info">Kitap Ödünç Ver</a>
+        </div>
         <table class="table">
             <thead>
             <tr>
@@ -20,12 +27,12 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($lendings as $lending)
+            @foreach($loans as $loan)
                 <tr>
-                    <td>{{ $lending->book->title }}</td>
-                    <td>{{ $lending->student->name }} {{ $lending->student->surname }}</td>
-                    <td>{{ $lending->borrow_date }}</td>
-                    <td>{{ $lending->return_date }}</td>
+                    <td>{{ $loan->book->title }}</td>
+                    <td>{{ $loan->student->name }} {{ $loan->student->surname }}</td>
+                    <td>{{ $loan->borrowed_at }}</td>
+                    <td>{{ $loan->returned_at }}</td>
                 </tr>
             @endforeach
             </tbody>
