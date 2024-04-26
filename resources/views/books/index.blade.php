@@ -40,7 +40,6 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Bu kitabı silmek istediğinizden emin misiniz?')">Sil</button>
                     </form>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#detailModal{{ $book->id }}">Detay</button>
                     @if($book->status == 'checked_out')
                         <form action="{{ route('books.return', $book->id) }}" method="POST" style="display: inline-block;">
                             @csrf
