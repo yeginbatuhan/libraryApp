@@ -52,7 +52,7 @@
         @endforeach
         </tbody>
     </table>
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end align-items-center">
         {{ $books->links('pagination::bootstrap-4') }}
     </div>
 </div>
@@ -68,4 +68,3 @@
 </body>
 </html>
 </x-app-layout>
-```
