@@ -3,12 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Loan;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
 {
     public function borrow(Request $request, $bookId)
     {
+        $studentId = auth()->user()->id;
+        $existingLoan = Loan::where('student_id', $studentId)
+            ->whereNull('returned_at')
+            ->first();
+
+        if ($existingLoan) {
+            return redirect()->back()->with('error', 'Zaten bir kitap ödünç aldınız!');
+        }
+
         $book = Book::find($bookId);
         if (!$book) {
             return redirect()->back()->with('error', 'Kitap bulunamadı!');
@@ -24,7 +34,7 @@ class LoanController extends Controller
 
         $loan = new Loan();
         $loan->book_id = $book->id;
-        $loan->student_id = $request->input('student_id');
+        $loan->student_id = $studentId;
         $loan->borrowed_at = $book->borrowed_at;
         $loan->returned_at = null;
         $loan->save();

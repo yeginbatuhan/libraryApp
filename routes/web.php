@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/books/lend/form', [BookController::class, 'lendForm'])->name('books.lend.form');
     Route::post('/books/lend/post', [BookController::class, 'lend'])->name('books.lend.post');
     Route::get('/books/lend/list', [LoanController::class, 'showLendList'])->name('books.lend.list');
+    Route::post('/books/{bookId}/borrow', [LoanController::class, 'borrow'])->name('books.borrow');
+    Route::post('/books/{bookId}/return', [LoanController::class, 'return'])->name('books.returnBook');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,8 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/books/lend/payment', [BookController::class, 'showLendForm'])->name('books.lend.payment');
     Route::post('/books/{book}/return', [BookController::class, 'returnBook'])->name('books.return');
 
-    Route::post('/books/{bookId}/borrow', [LoanController::class, 'borrow'])->name('books.borrow');
-    Route::post('/books/{bookId}/return', [LoanController::class, 'return'])->name('books.returnBook');
+
 
     Route::get('/students', [StudentController::class, 'index'])->name('students.index');
     Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
