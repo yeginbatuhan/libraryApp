@@ -120,6 +120,10 @@ class BookController extends Controller
             'status' => 'required|in:' . implode(',', array_keys($this->statusOptions))
         ]);
 
+        if ($book->status == 'checked_out' && $validatedData['status'] == 'available') {
+            $book->returned_at = now();
+        }
+
         $book->title = $validatedData['title'];
         $book->quantity = $validatedData['quantity'];
         $book->status = $validatedData['status'];
@@ -127,7 +131,6 @@ class BookController extends Controller
 
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla güncellendi!');
     }
-
     public function destroy(Book $book)
     {
         $book->delete();

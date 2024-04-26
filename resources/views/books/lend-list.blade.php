@@ -3,7 +3,7 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Kitap Ekle</title>
+        <title>Ödünç Verilen Kitaplar</title>
         <!-- Bootstrap CSS ekleme -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     </head>
