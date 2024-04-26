@@ -23,7 +23,7 @@ class StudentController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
-            'classroom' => 'required|max:255',
+            'classroom' => 'required|integer|min:1|max:8'
         ]);
 
         $student = new Student();
@@ -49,7 +49,7 @@ class StudentController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
-            'classroom' => 'required|max:255',
+            'classroom' => 'required|integer|min:1|max:8'
         ]);
 
         $student->update($validatedData);

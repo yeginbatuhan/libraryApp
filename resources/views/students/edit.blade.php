@@ -39,7 +39,7 @@
             <div class="form-group">
                 <label for="classroom">Öğrenci Sınıfı</label>
                 <input type="text" class="form-control" id="classroom" name="classroom"
-                       value="{{ $student->classroom }}" required>
+                       value="{{ $student->classroom }}" required min="1" max="8">
             </div>
             <button type="submit" class="btn btn-primary">Güncelle</button>
         </form>
