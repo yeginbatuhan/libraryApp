@@ -15,7 +15,7 @@
             </h2>
         </x-slot>
         <div class="d-flex justify-content-right mb-3">
-            <a href="{{ route('books.lend.post') }}" style="height: 38px;width: 148px;display: flex;justify-content: center;align-items: center;" class="btn btn-info">Kitap Ödünç Ver</a>
+            <a href="{{ route('books.lend.form') }}" style="height: 38px;width: 148px;display: flex;justify-content: center;align-items: center;" class="btn btn-info">Kitap Ödünç Ver</a>
         </div>
         <table class="table">
             <thead>

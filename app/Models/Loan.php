@@ -16,8 +16,7 @@ class Loan extends Model
         return $this->belongsTo(Book::class);
     }
 
-    public function student()
-    {
-        return $this->belongsTo(Student::class);
+    public function student() {
+        return $this->belongsTo(User::class, 'student_id');
     }
 }

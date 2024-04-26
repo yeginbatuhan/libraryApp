@@ -18,4 +18,8 @@ class Student extends Model
     {
         return $this->hasMany(Book::class);
     }
+    public function loans()
+    {
+        return $this->hasMany(Loan::class, 'student_id');
+    }
 }
