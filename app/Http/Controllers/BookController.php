@@ -12,12 +12,11 @@ class BookController extends Controller
     private $statusOptions = [
         'available' => 'Kütüphanede',
         'checked_out' => 'Ödünç Alındı',
-        'reserved' => 'Rezerve'
     ];
 
     public function index()
     {
-        $books = Book::with('student')->get();
+        $books = Book::with('student')->paginate(5);
         $students = Student::all();
         $statusOptions = $this->statusOptions;
         return view('books.index', compact('books', 'students', 'statusOptions'));
