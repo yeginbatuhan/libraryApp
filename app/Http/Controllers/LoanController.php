@@ -36,16 +36,9 @@ class LoanController extends Controller
         $loan->book_id = $book->id;
         $loan->student_id = $studentId;
         $loan->borrowed_at = $book->borrowed_at;
-        $loan->returned_at = null;
         $loan->save();
 
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla ödünç verildi!');
-    }
-
-    public function load()
-    {
-        $books = Book::where('status', 'available')->get();
-        return view('load', compact('books'));
     }
 
     public function return(Request $request, $bookId)
