@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Loan;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class BookController extends Controller
 {
@@ -83,12 +84,13 @@ class BookController extends Controller
         }
 
         if ($book->quantity > $book->borrowed_count) {
-            $book->student_id = $validatedData['student_id'];
-            $book->status = 'checked_out';
-            $book->borrowed_at = now();
-            $book->returned_at = null;
             $book->borrowed_count += 1;
             $book->save();
+            Loan::create([
+                'book_id' => $book->id,
+                'student_id' => $request->student_id,
+                'borrowed_at' => Carbon::now()
+            ]);
             return redirect()->route('books.index')->with('success', 'Kitap başarıyla ödünç verildi!');
         } else {
             return redirect()->back()->with('error', 'Bu kitaptan stokta kalmadı!');
@@ -98,15 +100,15 @@ class BookController extends Controller
 
     public function returnBook(Request $request, $bookId)
     {
-        $book = Book::find($bookId);
+        $book = Book::whereId($bookId)->first();
+        $loan = Loan::whereId($request->id)->first();
         if (!$book) {
             return redirect()->back()->with('error', 'Kitap bulunamadı!');
         }
-        $book->status = 'available';
-        $book->returned_at = now();
-        $book->borrowed_count -= 1;
+        $book['borrowed_count'] = ($book['borrowed_count'] - 1);
         $book->save();
-
+        $loan['returned_at'] = Carbon::now();
+        $loan->save();
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla iade edildi.');
     }
 
@@ -130,6 +132,7 @@ class BookController extends Controller
 
         return redirect()->route('books.index')->with('success', 'Kitap başarıyla güncellendi!');
     }
+
     public function destroy(Book $book)
     {
         $book->delete();

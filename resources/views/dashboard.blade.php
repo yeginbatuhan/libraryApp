@@ -2,7 +2,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('ANASAYFA YÖNETİM') }}
         </h2>
     </x-slot>
 
@@ -34,7 +34,7 @@
                         labels: {!! $students->pluck('name')->toJson() !!},
                         datasets: [{
                             label: 'Okunan Kitap Sayısı',
-                            data: {!! $students->pluck('books_count')->toJson() !!},
+                            data: {!! $students->pluck('loans_count')->toJson() !!},
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
                             borderColor: 'rgb(54,160,235)',
                             borderWidth: 1

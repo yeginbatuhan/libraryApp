@@ -8,11 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name',
-        'surname',
-        'classroom',
-    ];
+    protected $guarded =[];
 
     public function books()
     {
@@ -20,6 +16,6 @@ class Student extends Model
     }
     public function loans()
     {
-        return $this->hasMany(Loan::class, 'student_id');
+        return $this->hasMany(Loan::class);
     }
 }

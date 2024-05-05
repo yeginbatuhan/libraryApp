@@ -9,7 +9,7 @@ class Loan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['book_id', 'student_id', 'borrowed_at', 'returned_at'];
+    protected $guarded =[];
 
     public function book()
     {
@@ -17,6 +17,6 @@ class Loan extends Model
     }
 
     public function student() {
-        return $this->belongsTo(User::class, 'student_id');
+        return $this->belongsTo(Student::class, 'student_id');
     }
 }

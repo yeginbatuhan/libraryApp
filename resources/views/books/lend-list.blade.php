@@ -24,6 +24,7 @@
                 <th>Öğrenci Adı Soyadı</th>
                 <th>Ödünç Tarihi</th>
                 <th>İade Tarihi</th>
+                <th>İşlem</th>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +34,17 @@
                     <td>{{ $loan->student->name }} {{ $loan->student->surname }}</td>
                     <td>{{ $loan->borrowed_at }}</td>
                     <td>{{ $loan->returned_at }}</td>
+                    @if($loan->returned_at == null)
+                        <td>
+                        <form action="{{ route('books.return', $loan->book->id) }}" method="POST"
+                              style="display: inline-block;">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$loan->id}}">
+                            <button type="submit" class="btn btn-warning">İade Et</button>
+                        </form>
+                        </td>
+                    @endif
+
                 </tr>
             @endforeach
             </tbody>

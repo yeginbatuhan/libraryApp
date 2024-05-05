@@ -26,7 +26,8 @@
             <tr>
                 <th class="text-center">Kitap Adı</th>
                 <th class="text-center">Kitap Adedi</th>
-                <th class="text-center">Durumu</th>
+                <th class="text-center">Mevcut</th>
+                <th class="text-center">Verilen</th>
                 <th class="text-center">İşlemler</th>
             </tr>
             </thead>
@@ -35,7 +36,8 @@
                 <tr>
                     <td class="text-center">{{ $book->title }}</td>
                     <td class="text-center">{{ $book->quantity }}</td>
-                    <td class="text-center">{{ $statusOptions[$book->status] }}</td>
+                    <td class="text-center">{{ $statusOptions[$book->status] }} Adet: {{($book->quantity ) - ($book->borrowed_count) }}</td>
+                    <td class="text-center">Ödünç Verilen Adet: {{$book->borrowed_count }}</td>
                     <td class="text-center">
                         <a href="{{ route('books.edit', $book->id) }}" class="btn btn-primary">Düzenle</a>
                         <form action="{{ route('books.destroy', $book->id) }}" method="POST"
@@ -46,12 +48,10 @@
                                     onclick="return confirm('Bu kitabı silmek istediğinizden emin misiniz?')">Sil
                             </button>
                         </form>
-                        @if($book->status == 'checked_out')
-                            <form action="{{ route('books.return', $book->id) }}" method="POST"
-                                  style="display: inline-block;">
-                                @csrf
-                                <button type="submit" class="btn btn-warning">İade Et</button>
-                            </form>
+                        @if($book->borrowed_count > 0)
+                            <a href="{{ route('books.lend.payment')}}">
+                                <button type="submit" class="btn btn-warning">İade İşlemleri</button>
+                            </a>
                         @endif
                     </td>
                 </tr>

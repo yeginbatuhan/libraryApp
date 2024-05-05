@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/books/lend/post', [BookController::class, 'lend'])->name('books.lend.post');
     Route::get('/books/lend/list', [LoanController::class, 'showLendList'])->name('books.lend.list');
     Route::post('/books/{bookId}/borrow', [LoanController::class, 'borrow'])->name('books.borrow');
-    Route::post('/books/{bookId}/return', [LoanController::class, 'return'])->name('books.returnBook');
+    //Route::post('/books/{bookId}/return', [LoanController::class, 'return'])->name('books.returnBook');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

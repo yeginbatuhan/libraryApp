@@ -13,7 +13,7 @@ class DashboardController extends Controller
     {
         $studentCount = Student::count();
         $bookCount = Book::count();
-        $students = Student::withCount('books')->get();
+        $students = Student::withCount('loans')->get();
 
         return view('dashboard', compact('studentCount', 'bookCount', 'students'));
     }

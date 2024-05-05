@@ -18,7 +18,7 @@ return new class extends Migration
             $table->dateTime('borrowed_at');
             $table->dateTime('returned_at')->nullable();
             $table->foreign('book_id')->references('id')->on('books');
-            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('student_id')->references('id')->on('students');
             $table->timestamps();
         });
     }
